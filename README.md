@@ -33,6 +33,20 @@ The goal of the assignment is to detect multiple communities using modularity-ba
 
 *  Generated Outputs
 
+## Mathematical Methodology
+
+The core of the analysis relies on the **Modularity Matrix $B$**, defined as the difference between the actual adjacency matrix $A$ and a null model based on degree distribution:
+
+$$B_{ij} = A_{ij} - \\frac{k_i k_j}{2m}$$
+
+### The Recursive Algorithm:
+1.  **Construct $B^{(C)}$:** Form the modularity matrix for the current community $C$.
+2.  **Eigen-Decomposition:** Solve for the leading eigenpair $(\lambda_1, u_1)$.
+3.  **Check Modularity Gain:**
+    * If $\lambda_1 > 0$: Split community $C$ into two groups based on the signs of elements in $u_1$.
+    * If $\lambda_1 \le 0$: Stop; the community is indivisible.
+4.  **Recurse:** Apply steps 1-3 to all resulting subgroups.
+
 ### Running the notebook generates:
 
 *  Community visualisation images (iter_0.png, iter_1.png, …)
